@@ -13,3 +13,8 @@ print(value)
 #(<Cell 'Sheet1'.A5>, <Cell 'Sheet1'.B5>), (<Cell 'Sheet1'.A6>, <Cell 'Sheet1'.B6>))
 for a, b in value:
     print(a.value, b.value)
+#senthil 3
+# priya 7
+# anu 1
+# hari 5
+# ammu 4
