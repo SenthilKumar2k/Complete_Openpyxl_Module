@@ -16,7 +16,7 @@ while data_daily:
 
 print("row count for daily report : ",daily_row_count)
 
-#get row count for master_report
+#get row count for lifetime_report
 data_master=True
 master_row_count=0
 while data_master:
@@ -26,3 +26,36 @@ while data_master:
         data_master=False
 
 print("row count for master report : ", master_row_count)
+
+#get data from the daily_report and stored it in the list in the form of dict
+daily_data_list=[]
+
+for i in range(1,daily_row_count):
+    daily_row_data={}
+    daily_row_data["id"]=daily_data.cell(row=i,column=1).value
+    daily_row_data["Today purchase"]=daily_data.cell(row=i,column=2).value
+    daily_row_data["Today rewards"]=daily_data.cell(row=i, column=3).value
+    daily_data_list.append(daily_row_data)
+
+print(daily_data_list)
+#[{'id': 30, 'Today purchase': 1, 'Today rewards': 3}]
+
+# get the particular row data from lifetime_report by using the id of daily report 
+# add lifetime purchase and todays purchase
+# add total rewards and todays rewards
+
+for i in range(2,master_row_count):
+    id=master_data.cell(row=i,column=1).value
+    for row in daily_data_list:
+        if row["id"]==id:
+            today_purchase=row['Today purchase']
+            today_reward=row['Today rewards']
+            total_purchase=master_data.cell(row=i,column=5).value
+            total_rewards=master_data.cell(row=i,column=6).value
+            print(total_purchase,total_rewards)
+            purchase=total_purchase+today_purchase
+            rewards=total_rewards+today_reward
+            master_data.cell(row=i,column=5).value=purchase
+            master_data.cell(row=i,column=6).value=rewards
+
+master_report.save("lifetime_report.xlsx")
