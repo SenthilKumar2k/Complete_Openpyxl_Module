@@ -73,6 +73,13 @@ for data in daily_data_list:
 ids.pop(0)
 print(ids)
 
+flag=1
+for id in ids:
+    flag+=1
+    while True:
+        ws.cell(row=flag, column=1).value=id
+        break
+
 final_data=[]
 for i in range(1,master_row_count):
     id=master_data.cell(row=i, column=1).value
@@ -81,10 +88,17 @@ for i in range(1,master_row_count):
         for j in range(2,7):
             exist_list.append(master_data.cell(row=i, column=j).value)
         final_data.append(exist_list)
-print(id)
+
+count=0
+for i in range(2,11):
+        count+=1
+        for j,data in zip(range(2,7),final_data[count-1]):
+            ws.cell(row=i,column=j).value=data
+
 print(final_data)
+for data in final_data:
+    ws.append(data)
 
-
-#new_report.save("new purchase report from exist.xlsx")
+new_report.save("new purchase report from exist.xlsx")
 
 
