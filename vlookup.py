@@ -45,3 +45,14 @@ for i in daily.iter_rows():
     # if row==None:
     #     break
     print(row)
+
+for i in daily.iter_rows():
+    id=i[0].value
+    row=i[0].row
+    for j in master.iter_rows():
+        if j[0].value==id:
+            daily.cell(row=row, column=4).value=j[1].value
+            daily.cell(row=row, column=5).value=j[2].value
+            daily.cell(row=row, column=6).value=j[3].value
+
+daily_report.save('daily_report_update.xlsx')
