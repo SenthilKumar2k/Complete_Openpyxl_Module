@@ -10,7 +10,7 @@ while True:
     first=ws.cell(row=row_count, column=2).value
     if first is not None:
         print(re.sub(r'@"','',str(first)))
-        ws.cell(row=row_count, column=2).value=first.strip('"')
+        ws.cell(row=row_count, column=2).value=str(first).strip('"')
     else:
         break
 wb.save("lifetime_report.xlsx")
